@@ -9,11 +9,14 @@ party = False
 pond = True
 # should objects bounce off wall or go oob
 wall = True
+# surprise
+gay = False
 
 #from winsound import PlaySound as play
 pygame.mixer.pre_init(44100, -16, 1, 512)
 pygame.init()
 myfont = pygame.font.SysFont("monospace", 15)
+bigfont = pygame.font.SysFont("monospace", 224)
 pygame.mixer.Channel(1).set_volume(.2)
 #music
 if pond:pygame.mixer.Sound('aquarium.wav').play(-1).set_volume(1)
@@ -39,6 +42,7 @@ screen = pygame.display.set_mode(size)
 black = (0,0,0)
 white = (255,255,255)
 skyblue = (0,96,192)
+rainbow = [(255,0,0),(255,128,0),(224,224,0),(0,224,0),(0,0,255),(192,0,255)]
 
 dot_red = pygame.image.load("dot_red.png")
 dot_blue = pygame.image.load("dot_blue.png")
@@ -142,6 +146,15 @@ while 1:
 		screen.blit(label,(b[0]+16,b[1]+16*(i+1)))
 	#barycenter velocity vector
 	pygame.draw.aaline(screen,white,(b[0]+bspritesize/2,b[1]+bspritesize/2),(b[0]+bv[0]*500+bspritesize/2,b[1]+bv[1]*500+bspritesize/2),1)
+	#gay
+	if gay:
+		gayinfo = 'GAYYYY'
+		super = bv2[0]*1000-50
+		try:gaycounter+=1
+		except:gaycounter=0
+		for i in range(len(gayinfo)):
+			label = bigfont.render(gayinfo[i],1,rainbow[(i+int(gaycounter/20))%6])
+			screen.blit(label,(128*i,super))
 	#display
 	pygame.display.flip()
 	objects = grav(objects)
