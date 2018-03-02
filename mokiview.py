@@ -77,6 +77,25 @@ def getpixeldata(bmp):#w,h
 					coord = (2*i+j)%imgsize[0],round((2*i+j)//imgsize[0])
 					data[coord[1]][coord[0]] = tribyte
 			except Exception as e:print('ERROR loading',coord,e)
+	elif mode==225:
+		for i in range(len(bs)):
+			byte = bs[i]
+			try:
+				for j in range(4):#for every 2 bits
+					bit = int('0b'+'{0:08b}'.format(byte)[2*j:2*j+2],2)
+					tribyte = [(84,79,75),(167,104,86),(196,176,169),(247,129,91)][bit]
+					coord = (4*i+j)%imgsize[0],round((4*i+j)//imgsize[0])
+					data[coord[1]][coord[0]] = tribyte
+	elif mode==226:
+		for i in range(len(bs)):
+			byte = bs[i]
+			try:
+				for j in range(4):#for every 2 bits
+					bit = int('0b'+'{0:08b}'.format(byte)[2*j:2*j+2],2)
+					tribyte = [(24,40,144),(56,96,192),(128,96,192),(144,16,176)][bit]
+					coord = (4*i+j)%imgsize[0],round((4*i+j)//imgsize[0])
+					data[coord[1]][coord[0]] = tribyte
+			except Exception as e:print('ERROR loading',coord,e)
 	elif mode==251:
 		for i in range(0,len(bs),3):
 			byte = '{0:08b}'.format(bs[i:i+3])

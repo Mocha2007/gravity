@@ -60,6 +60,16 @@ Output is decimal.
   * D = #c6d2c6
   * E = #eeeae7
   * F = #ffffff
+* E1 - Palette 2 "Mars"
+  * 00 = #544f4b
+  * 01 = #a76856
+  * 10 = #c4b0a9
+  * 11 = #f7815b
+* E2 - Palette 3 "Dream"
+  * 00 = #182890
+  * 01 = #3860c0
+  * 10 = #8060c0
+  * 11 = #9010b0
 * F0 (unimplemented) (24-bit vectorized RGB) 12-byte: ID RR GG BB X1__ Y1__ X2__ Y2__
 * FB (6-bit RGB) byte = RRGGBBRR GGBBRRGG BBRRGGBB
 * FC (4-bit RGBA) byte = RGBARGBA
