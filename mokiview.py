@@ -29,15 +29,22 @@ def getpixeldata(bmp):#w,h
 	if mode==0:
 		for i in range(len(bs)):
 			byte = bs[i]
-			print(byte,'=','{0:08b}'.format(byte))
-			input()
 			try:
 				for j in range(8):#for each bit
 					bit = int('{0:08b}'.format(byte)[j])
 					tribyte = (255,255,255) if bit else (0,0,0)
 					coord = (8*i+j)%imgsize[1],round((8*i+j)//imgsize[1])
 					data[coord[0]][coord[1]] = tribyte
-					print(coord,'=',tribyte)
+					#print(coord,'=',tribyte)
+			except:print('ERROR loading',coord)
+	elif mode==1:
+		for i in range(len(bs)):
+			byte = '{0:08b}'.format(bs[i])
+			try:
+				tribyte = int(byte[0])*128+int(byte[1])*64,int(byte[2])*128+int(byte[3])*64,int(byte[4])*128+int(byte[5])*64
+				coord = i%imgsize[1],round(i//imgsize[1])
+				data[coord[1]][coord[0]] = tribyte
+				#print(coord,'=',tribyte)
 			except:print('ERROR loading',coord)
 	elif mode==3:
 		for i in range(0,len(bs),3):
