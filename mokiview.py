@@ -53,6 +53,28 @@ def getpixeldata(bmp):#w,h
 				coord = round(i/3%imgsize[0]),round(i/3//imgsize[0])
 				data[coord[1]][coord[0]] = tribyte
 			except Exception as e:print('ERROR loading',coord,e)
+	elif mode==253:
+		for i in range(len(bs)):
+			byte = '{0:08b}'.format(bs[i])
+			try:
+				for j in range(2):#for every 2 bits
+					bits = byte[4*j:4*j+4]
+					tribyte = (int('0b'+bits[0],2)*255,int('0b'+bits[1],2)*255,int('0b'+bits[2],2)*255)
+					coord = (2*i+j)%imgsize[0],round((2*i+j)//imgsize[0])
+					data[coord[1]][coord[0]] = tribyte
+					#print(coord,'=',tribyte)
+			except Exception as e:print('ERROR loading',coord,e)
+	elif mode==254:
+		for i in range(len(bs)):
+			byte = bs[i]
+			try:
+				for j in range(4):#for every 2 bits
+					bit = int('0b'+'{0:08b}'.format(byte)[2*j:2*j+2],2)
+					tribyte = (255,255,255) if bit==3 else ((170,170,170) if bit==2 else ((85,85,85) if bit==1 else (0,0,0)))
+					coord = (4*i+j)%imgsize[0],round((4*i+j)//imgsize[0])
+					data[coord[1]][coord[0]] = tribyte
+					#print(coord,'=',tribyte)
+			except Exception as e:print('ERROR loading',coord,e)
 	else:print('Unrecognized mode')
 	return data
 
