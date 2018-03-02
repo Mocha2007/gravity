@@ -43,7 +43,7 @@ while 1:#safety net
 			for i in range(0,len(image),2):#convert to a decimal array OwO
 				ia+=[int('0x'+image[i:i+2],16)]
 
-			mul = max(int(768/max(findsize(ia))),1)
+			mul = max(int(512/max(findsize(ia))),1)
 			size = int(findsize(ia)[0]*mul),int(findsize(ia)[1]*mul)
 			if size[0]<2048>size[1]:
 				screen = pygame.display.set_mode(size)
