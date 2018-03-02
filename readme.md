@@ -40,6 +40,7 @@ Output is decimal.
   * 0 = #000000 
   * 1 = #FFFFFF
 * 01 - (8-bit RGBA) byte = RRGGBBAA
+* 02 - (16-bit RGBA) byte = RRRRGGGG BBBBAAAA
 * 03 - (24-bit color) RR GG BB
 * 04 - (32-bit color) RR GG BB AA
 * F0 (unimplemented) (24-bit vectorized RGB) 12-byte: ID RR GG BB X1__ Y1__ X2__ Y2__

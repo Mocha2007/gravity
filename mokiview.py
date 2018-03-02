@@ -44,7 +44,14 @@ def getpixeldata(bmp):#w,h
 				tribyte = int(byte[0])*170+int(byte[1])*85,int(byte[2])*170+int(byte[3])*85,int(byte[4])*170+int(byte[5])*85
 				coord = i%imgsize[0],round(i//imgsize[0])
 				data[coord[1]][coord[0]] = tribyte
-				#print(coord,'=',tribyte)
+			except Exception as e:print('ERROR loading',coord,e)
+	elif mode==2:
+		for i in range(0,len(bs),2):
+			byte = '{0:08b}'.format(bs[i:i+2])
+			try:
+				tribyte = int('0b'+byte[0:4],2)*17,int('0b'+byte[4:8],2)*17,int('0b'+byte[8:12],2)*17
+				coord = round(i/2%imgsize[0]),round(i/2//imgsize[0])
+				data[coord[1]][coord[0]] = tribyte
 			except Exception as e:print('ERROR loading',coord,e)
 	elif mode==3:
 		for i in range(0,len(bs),3):
@@ -69,7 +76,6 @@ def getpixeldata(bmp):#w,h
 					tribyte = (int('0b'+bits[0],2)*255,int('0b'+bits[1],2)*255,int('0b'+bits[2],2)*255)
 					coord = (2*i+j)%imgsize[0],round((2*i+j)//imgsize[0])
 					data[coord[1]][coord[0]] = tribyte
-					#print(coord,'=',tribyte)
 			except Exception as e:print('ERROR loading',coord,e)
 	elif mode==254:
 		for i in range(len(bs)):
@@ -80,7 +86,6 @@ def getpixeldata(bmp):#w,h
 					tribyte = (255,255,255) if bit==3 else ((170,170,170) if bit==2 else ((85,85,85) if bit==1 else (0,0,0)))
 					coord = (4*i+j)%imgsize[0],round((4*i+j)//imgsize[0])
 					data[coord[1]][coord[0]] = tribyte
-					#print(coord,'=',tribyte)
 			except Exception as e:print('ERROR loading',coord,e)
 	else:print('Unrecognized mode')
 	return data
