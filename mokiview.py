@@ -43,9 +43,12 @@ while 1:#safety net
 			ia+=[int('0x'+image[i:i+2],16)]
 
 		mul = max(int(768/max(findsize(ia))),1)
-		break
+		try:
+			size = int(findsize(ia)[0]*mul),int(findsize(ia)[1]*mul)
+			break
+		except:print('Image too Large!')
 	print('File too Large!')
-size = int(findsize(ia)[0]*mul),int(findsize(ia)[1]*mul)
+
 screen = pygame.display.set_mode(size)
 
 print('Loading image...')
