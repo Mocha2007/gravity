@@ -1,17 +1,7 @@
 import binascii,pygame
 from sys import exit
+from os import stat
 pygame.init()
-
-loc = input('Location\n> ')# mokiview.py or test.moki
-
-# https://stackoverflow.com/a/34687617/2579798
-with open(loc, 'rb') as f:image=binascii.hexlify(f.read())
-
-# create the image array
-image = str(image)[2:-1]
-ia = []
-for i in range(0,len(image),2):#convert to a decimal array OwO
-	ia+=[int('0x'+image[i:i+2],16)]
 
 def findsize(bmp):#w,h
 	w = bmp[6]+256*bmp[5]
@@ -20,11 +10,6 @@ def findsize(bmp):#w,h
 
 def findstart(bmp):
 	return bmp[15]+256*bmp[14]
-
-mul = 512/max(findsize(ia))
-if mul<.2:exit()#safety net
-size = int(findsize(ia)[0]*mul),int(findsize(ia)[1]*mul)
-screen = pygame.display.set_mode(size)
 
 def zeromatrix(x,y):
 	a = []
@@ -45,12 +30,30 @@ def getpixeldata(bmp):#w,h
 		except:print('ERROR loading',coord)
 	return data
 
+while 1:#safety net
+	loc = input('Location\n> ')# mokiview.py or test.moki
+	if stat(loc).st_size<2**20:
+		# https://stackoverflow.com/a/34687617/2579798
+		with open(loc, 'rb') as f:image=binascii.hexlify(f.read())
+
+		# create the image array
+		image = str(image)[2:-1]
+		ia = []
+		for i in range(0,len(image),2):#convert to a decimal array OwO
+			ia+=[int('0x'+image[i:i+2],16)]
+
+		mul = 512/max(findsize(ia))
+		if mul>.2:break
+		print('Image too Large!')
+	print('File too Large!')
+size = int(findsize(ia)[0]*mul),int(findsize(ia)[1]*mul)
+screen = pygame.display.set_mode(size)
+
 print('Loading image...')
 final = getpixeldata(ia)#[::-1]
 fsize = findsize(ia)
 
 #disp
-
 print('Rendering image...')
 for col in range(fsize[0]):
 	for row in range(fsize[1]):
