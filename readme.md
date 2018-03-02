@@ -1,4 +1,8 @@
+# mokiview.py
 
-Accepted b/px formats:
-00 : 1 = #FFFFFF, 0 = #000000 
-03 : RR GG BB
+## Accepted b/px formats:
+
+* 00 
+  * 0 = #000000 
+   * 1 = #FFFFFF
+* 03 - RR GG BB
