@@ -41,10 +41,12 @@ Output is decimal.
   * 1 = #FFFFFF
 * 01 - (8-bit RGBA) byte = RRGGBBAA
 * 02 - (16-bit RGBA) byte = RRRRGGGG BBBBAAAA
-* 03 - (24-bit color) RR GG BB
-* 04 - (32-bit color) RR GG BB AA
+* 03 - (24-bit RGB) RR GG BB
+* 04 - (32-bit RGBA) RR GG BB AA
 * F0 (unimplemented) (24-bit vectorized RGB) 12-byte: ID RR GG BB X1__ Y1__ X2__ Y2__
-* FD (4-bit RGBA) byte = RGBARGBA
+* FB (6-bit RGB) byte = RRGGBBRR GGBBRRGG BBRRGGBB
+* FC (4-bit RGBA) byte = RGBARGBA
+* FD (3-bit RGB) byte = RGBRGBRG BRGBRGBR GBRGBRGB
 * FE (2-bit greyscale)
   * 00 = #000000 
   * 01 = #555555
