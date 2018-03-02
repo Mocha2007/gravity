@@ -61,7 +61,7 @@ Number of layers, for image editing and 3-D imagery. Maximum 255.
 
 ## Speed
 
-4 times the FPS. Minimum 0 hz, maximum 64 hz. 
+4 times the FPS. Minimum 0.25 hz, maximum 64 hz. 
 
 ## Frames
 
