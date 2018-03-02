@@ -11,6 +11,9 @@ def findsize(bmp):#w,h
 def findstart(bmp):
 	return bmp[15]+256*bmp[14]
 
+def findmode(bmp):
+	return bmp[4]
+
 def zeromatrix(x,y):
 	a = []
 	for i in range(x):
@@ -18,16 +21,32 @@ def zeromatrix(x,y):
 	return a
 
 def getpixeldata(bmp):#w,h
+	mode = findmode(bmp)
 	start = findstart(bmp)
 	imgsize = findsize(bmp)
 	data = zeromatrix(imgsize[0],imgsize[1])
 	bs = bmp[start:]
-	for i in range(0,len(bs),3):
-		try:
-			tribyte = (bs[i],bs[i+1],bs[i+2])
-			coord = round(i/3%imgsize[1]),round(i/3//imgsize[1])
-			data[coord[0]][coord[1]] = tribyte
-		except:print('ERROR loading',coord)
+	if mode==0:
+		for i in range(len(bs)):
+			byte = bs[i]
+			print(byte,'=','{0:08b}'.format(byte))
+			input()
+			try:
+				for j in range(8):#for each bit
+					bit = int('{0:08b}'.format(byte)[j])
+					tribyte = (255,255,255) if bit else (0,0,0)
+					coord = (8*i+j)%imgsize[1],round((8*i+j)//imgsize[1])
+					data[coord[0]][coord[1]] = tribyte
+					print(coord,'=',tribyte)
+			except:print('ERROR loading',coord)
+	elif mode==3:
+		for i in range(0,len(bs),3):
+			try:
+				tribyte = (bs[i],bs[i+1],bs[i+2])
+				coord = round(i/3%imgsize[1]),round(i/3//imgsize[1])
+				data[coord[0]][coord[1]] = tribyte
+			except:print('ERROR loading',coord)
+	else:print('Unrecognized mode')
 	return data
 
 while 1:#safety net
