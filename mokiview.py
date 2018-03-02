@@ -86,6 +86,7 @@ def getpixeldata(bmp):#w,h
 					tribyte = [(84,79,75),(167,104,86),(196,176,169),(247,129,91)][bit]
 					coord = (4*i+j)%imgsize[0],round((4*i+j)//imgsize[0])
 					data[coord[1]][coord[0]] = tribyte
+			except Exception as e:print('ERROR loading',coord,e)
 	elif mode==226:
 		for i in range(len(bs)):
 			byte = bs[i]
