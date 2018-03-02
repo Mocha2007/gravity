@@ -43,6 +43,23 @@ Output is decimal.
 * 02 - (16-bit RGBA) byte = RRRRGGGG BBBBAAAA
 * 03 - (24-bit RGB) RR GG BB
 * 04 - (32-bit RGBA) RR GG BB AA
+* E0 - Palette 1 "Earth"
+  * 0 = #000000
+  * 1 = #040613
+  * 2 = #244058
+  * 3 = #414b29
+  * 4 = #4d4c48
+  * 5 = #737b86
+  * 6 = #78829b
+  * 7 = #7c6d4c
+  * 8 = #85796d
+  * 9 = #908782
+  * A = #9a8860
+  * B = #ab8465
+  * C = #c0c1b1
+  * D = #c6d2c6
+  * E = #eeeae7
+  * F = #ffffff
 * F0 (unimplemented) (24-bit vectorized RGB) 12-byte: ID RR GG BB X1__ Y1__ X2__ Y2__
 * FB (6-bit RGB) byte = RRGGBBRR GGBBRRGG BBRRGGBB
 * FC (4-bit RGBA) byte = RGBARGBA
