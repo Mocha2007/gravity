@@ -1,3 +1,30 @@
+# hex.py
+Simple file writer, accepts numbers in binary, octal, hex, decimal.
+
+Format:
+
+* bX - X_2
+* oX - X_8
+* dX - X_10
+* xX - X_16
+
+# koipond.py
+Gravity Simulator. Editable infile are four options:
+* party - Activate party mode (gravitational effects reversed)
+* pond - Fish theme
+* wall - Toggles wall preventing objects from leaving screen
+* gay - Surprise
+
+# mokitools.py
+A helper for those manually writing 2-bit mokifiles.
+
+* w - 11
+* s - 10
+* g - 01
+* b - 00
+
+Output is decimal.
+
 # mokiview.py
 
 ## Accepted b/px formats:
