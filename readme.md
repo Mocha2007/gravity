@@ -71,3 +71,7 @@ For video. Maximum 16,777,215 (18,641 hours of video at 1/4 hz, 78 hours of vide
 
 Byte where the image starts. Normally 0x10, but may be postponed to include metadata or palette information.
 
+## Notes
+
+* 0x0000 under Width, Height, Layers, and Frames is treated as 0x0001.
+* Theoretical maximum filesize is 73496498551345642516 bytes (73.5 EB), of which 73496498551345642500 bytes is the image data. (65535x65535x255x16777215 px 32-bit color)
