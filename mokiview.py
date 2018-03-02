@@ -32,24 +32,25 @@ def getpixeldata(bmp):#w,h
 
 while 1:#safety net
 	loc = input('Location\n> ')# mokiview.py or test.moki
-	if stat(loc).st_size<2**20:
-		# https://stackoverflow.com/a/34687617/2579798
-		with open(loc, 'rb') as f:image=binascii.hexlify(f.read())
+	try:
+		if stat(loc).st_size<2**20:
+			# https://stackoverflow.com/a/34687617/2579798
+			with open(loc,'rb') as f:image=binascii.hexlify(f.read())
 
-		# create the image array
-		image = str(image)[2:-1]
-		ia = []
-		for i in range(0,len(image),2):#convert to a decimal array OwO
-			ia+=[int('0x'+image[i:i+2],16)]
+			# create the image array
+			image = str(image)[2:-1]
+			ia = []
+			for i in range(0,len(image),2):#convert to a decimal array OwO
+				ia+=[int('0x'+image[i:i+2],16)]
 
-		mul = max(int(768/max(findsize(ia))),1)
-		try:
+			mul = max(int(768/max(findsize(ia))),1)
 			size = int(findsize(ia)[0]*mul),int(findsize(ia)[1]*mul)
-			break
-		except:print('Image too Large!')
-	print('File too Large!')
-
-screen = pygame.display.set_mode(size)
+			if size[0]<2048>size[1]:
+				screen = pygame.display.set_mode(size)
+				break
+			else:print('Image too Large!')
+		else:print('File too Large!')
+	except FileNotFoundError:print('File does not exist!')
 
 print('Loading image...')
 final = getpixeldata(ia)#[::-1]
