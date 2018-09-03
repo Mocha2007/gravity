@@ -15,10 +15,10 @@ def findstart(bmp):
 def findmode(bmp):
 	return bmp[4]
 
-def zeromatrix(size):
+def zeromatrix(s): # s for size
 	a = []
-	for i in range(size[1]):
-		a += [[0]*size[0]]
+	for i in range(s[1]):
+		a += [[0]*s[0]]
 	return a
 
 def getpixeldata(bmp): # w,h
